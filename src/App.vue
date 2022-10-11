@@ -1,5 +1,6 @@
 <template>
   <Toast :toasts="toasts" @remove="remove" />
+
   <div>
     <button @click="insert">
       some expensive fetching happens when clicked and returns a tosst
