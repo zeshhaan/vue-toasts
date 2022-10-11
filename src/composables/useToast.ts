@@ -8,6 +8,7 @@ export function useToast() {
   const insert = () => {
     toasts.value.splice(id, 0, id++);
 
+    // reset
     watch(toasts.value, (newVal) => {
       if (!newVal.length) id = 0;
     });

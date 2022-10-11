@@ -19,7 +19,7 @@
           <div class="ml-4 flex flex-shrink-0">
             <button
               type="button"
-              @click="remove(toast)"
+              @click="$emit('remove', toast)"
               class="
                 inline-flex
                 rounded-md
@@ -28,7 +28,7 @@
                 hover:text-gray-500
                 focus:outline-none
                 focus:ring-2
-                focus:ring-indigo-500
+                focus:ring-yellow-500
                 focus:ring-offset-2
               "
             >
@@ -40,16 +40,23 @@
       </div>
     </li>
   </TransitionGroup>
-  <button @click="insert">click to insert toast</button>
 </template>
 
 <script setup lang="ts">
-import { useToast } from '../composables/useToast.ts';
 import { XMarkIcon } from '@heroicons/vue/20/solid';
 import SuccessToast from './components/SuccessToast.vue';
 import ErrorToast from './components/ErrorToast.vue';
 
-const { toasts, insert, remove } = useToast();
+const props = withDefaults(
+  defineProps<{
+    toasts?: array;
+  }>(),
+  {
+    toasts: undefined,
+  }
+);
+
+defineEmits(['remove']);
 </script>
 
 <style>
