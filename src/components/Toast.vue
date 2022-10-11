@@ -7,21 +7,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref, watch } from 'vue';
+import { useToast } from '../composables/useToast.ts';
 
-const toasts = ref([]);
-const counter = ref(0);
-
-const generateToast = () => {
-  toasts.value.push(counter);
-  counter.value++;
-
-  watch(toasts.value, (newVal) => {
-    if (!newVal.length) counter.value = 0;
-  });
-};
-
-const closeToast = (id) => {
-  toasts.value.splice(id, 1);
-};
+const { toasts, closeToast, generateToast } = useToast();
 </script>
