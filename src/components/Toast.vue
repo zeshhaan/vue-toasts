@@ -1,15 +1,8 @@
 <template>
-  <transition
-    v-for="(toast, id) in toasts"
-    :key="id"
-    enter-active-class="transform ease-out duration-300 transition"
-    enter-from-class="translate-y-2 opacity-0 sm:translate-y-0 sm:translate-x-2"
-    enter-to-class="translate-y-0 opacity-100 sm:translate-x-0"
-    leave-active-class="transition ease-in duration-100"
-    leave-from-class="opacity-100"
-    leave-to-class="opacity-0"
-  >
-    <div
+  <TransitionGroup tag="ul" name="fade">
+    <li
+      v-for="toast in toasts"
+      :key="toast"
       class="
         pointer-events-auto
         w-full
@@ -22,19 +15,61 @@
     >
       <div class="p-4">
         <div class="flex items-start">
-          <div class="ml-3 w-0 flex-1">This is a Toast, ok. {{ id }}</div>
-          <button @click="closeToast(toast)">close</button>
+          <div class="ml-3 w-0 flex-1">This is a Toast, ok. {{ toast }}</div>
+          <div class="ml-4 flex flex-shrink-0">
+            <button
+              type="button"
+              @click="remove(toast)"
+              class="
+                inline-flex
+                rounded-md
+                bg-white
+                text-gray-400
+                hover:text-gray-500
+                focus:outline-none
+                focus:ring-2
+                focus:ring-indigo-500
+                focus:ring-offset-2
+              "
+            >
+              <span class="sr-only">Close</span>
+              <XMarkIcon class="h-5 w-5" aria-hidden="true" />
+            </button>
+          </div>
         </div>
       </div>
-    </div>
-  </transition>
-  <button @click="generateToast">click to show toast</button>
+    </li>
+  </TransitionGroup>
+  <button @click="insert">click to insert toast</button>
 </template>
 
 <script setup lang="ts">
 import { useToast } from '../composables/useToast.ts';
+import { XMarkIcon } from '@heroicons/vue/20/solid';
 import SuccessToast from './components/SuccessToast.vue';
 import ErrorToast from './components/ErrorToast.vue';
 
-const { toasts, closeToast, generateToast } = useToast();
+const { toasts, insert, remove } = useToast();
 </script>
+
+<style>
+/* 1. declare transition */
+.fade-move,
+.fade-enter-active,
+.fade-leave-active {
+  transition: all 0.5s cubic-bezier(0.55, 0, 0.1, 1);
+}
+
+/* 2. declare enter from and leave to state */
+.fade-enter-from,
+.fade-leave-to {
+  opacity: 0;
+  transform: scaleY(0.01) translate(30px, 0);
+}
+
+/* 3. ensure leaving items are taken out of layout flow so that moving
+      animations can be calculated correctly. */
+.fade-leave-active {
+  position: absolute;
+}
+</style>
