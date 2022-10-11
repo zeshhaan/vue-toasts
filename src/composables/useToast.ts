@@ -5,7 +5,8 @@ export function useToast() {
 
   let id = toasts.value.length + 1;
 
-  const insert = () => {
+  const insert = (e) => {
+    console.log(e);
     toasts.value.splice(id, 0, id++);
 
     // reset

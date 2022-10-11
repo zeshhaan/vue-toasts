@@ -32,6 +32,13 @@
       >
         <div class="p-4">
           <div class="flex items-start">
+            <div class="flex-shrink-0 pt-0.5">
+              <img
+                class="h-10 w-10 rounded-full"
+                src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2.2&w=160&h=160&q=80"
+                alt=""
+              />
+            </div>
             <div class="ml-3 w-0 flex-1">This is a Toast, ok. {{ toast }}</div>
             <div class="ml-4 flex flex-shrink-0">
               <button

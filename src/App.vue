@@ -2,7 +2,9 @@
   <Toast :toasts="toasts" @remove="remove" />
 
   <div>
-    <button @click="insert">
+    <button
+      @click="insert({ preset: 'success', message: 'hi, this is a message' })"
+    >
       some expensive fetching happens when clicked and returns a tosst
       notification ok.
     </button>
