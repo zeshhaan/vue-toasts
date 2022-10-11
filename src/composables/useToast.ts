@@ -7,12 +7,15 @@ export function useToast() {
 
   const insert = (e) => {
     console.log(e);
-    toasts.value.splice(id, 0, id++);
+    toasts.value.splice(id, 0, {
+      id,
+      ...e,
+    });
 
     // reset
-    watch(toasts.value, (newVal) => {
-      if (!newVal.length) id = 0;
-    });
+    // watch(toasts.value, (newVal) => {
+    //   if (!newVal.length) id = 0;
+    // });
   };
 
   function remove(toast) {

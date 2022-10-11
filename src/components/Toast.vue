@@ -4,6 +4,7 @@
       tag="ul"
       name="fade"
       class="
+        fixed
         flex
         w-full
         flex-col
@@ -39,7 +40,7 @@
                 alt=""
               />
             </div>
-            <div class="ml-3 w-0 flex-1">This is a Toast, ok. {{ toast }}</div>
+            <div class="ml-3 w-0 flex-1">{{ toast.message }}</div>
             <div class="ml-4 flex flex-shrink-0">
               <button
                 type="button"
@@ -68,13 +69,14 @@
 </template>
 
 <script setup lang="ts">
+import { Toast } from '../types/Toast';
 import { XMarkIcon } from '@heroicons/vue/20/solid';
 import SuccessToast from './components/SuccessToast.vue';
 import ErrorToast from './components/ErrorToast.vue';
 
 const props = withDefaults(
   defineProps<{
-    toasts?: array;
+    toasts?: Toast[];
   }>(),
   {
     toasts: undefined,

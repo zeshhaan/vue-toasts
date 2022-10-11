@@ -1,12 +1,11 @@
 <template>
   <Toast :toasts="toasts" @remove="remove" />
 
-  <div>
+  <div class="font-mono text-4xl">
     <button
       @click="insert({ preset: 'success', message: 'hi, this is a message' })"
     >
-      some expensive fetching happens when clicked and returns a tosst
-      notification ok.
+      open toast
     </button>
   </div>
 </template>
